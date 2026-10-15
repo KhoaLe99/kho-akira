@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>Kho Akira</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Kho Akira">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#E7E6E1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#141516" media="(prefers-color-scheme: dark)">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" href="icon-192.png">
+<style>
+  :root { --bg:#E7E6E1; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#141516; } }
+  html, body { margin:0; height:100%; background:var(--bg); overflow:hidden; }
+  #wrap { position:fixed; inset:0; overflow:hidden; background:var(--bg); }
+  #app { position:absolute; left:0; width:100%; border:0; background:var(--bg); }
+</style>
+</head>
+<body>
+<div id="wrap"><iframe id="app" allow="camera *; microphone *; clipboard-write *" title="Kho Akira"></iframe></div>
+<script>
+  // ID bản triển khai Apps Script (@45). Đổi ở đây nếu sau này tạo bản triển khai mới.
+  var APP_URL = 'https://script.google.com/macros/s/AKfycbzG8YpkrEY5dHAzW3jykLLBcvhLEcnlD9nKuYqryy-e25VVOcxt-nU61RvXhanQ7g/exec';
+  // Số pixel cắt ở đầu để che banner "Ứng dụng này do một người dùng Google Apps Script tạo".
+  // 0 = không cắt. Thử bằng cách thêm ?crop=40 sau địa chỉ trang này.
+  var CROP_PX = 0;
+  var q = new URLSearchParams(location.search).get('crop');
+  var crop = q !== null && !isNaN(+q) ? +q : CROP_PX;
+  var f = document.getElementById('app');
+  f.style.top = (-crop) + 'px';
+  f.style.height = 'calc(100% + ' + crop + 'px)';
+  f.src = APP_URL;
+</script>
+</body>
+</html>
